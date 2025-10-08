@@ -2,10 +2,12 @@ class SistemaParticulas {
   
   ArrayList<Particula> particulas; 
   PVector origin;
+  float viscosidad;
  
-  SistemaParticulas(PVector pos) {
+  SistemaParticulas(PVector pos, float v) {
     particulas = new ArrayList<Particula>();
     origin = pos.copy();
+    viscosidad = v;
   }
   
   void addParticula() {
@@ -13,9 +15,15 @@ class SistemaParticulas {
     particulas.add(p);
   }
   
+    
   void run() {
-    for(Particula p: particulas) {
+    for(int i = 0;  i < particulas.size(); i++) {
+      Particula p = particulas.get(i);
+      p.aplicarViscosidad(viscosidad);
       p.run();
+      if (p.isDead) {
+        particulas.remove(i);
+      }
     }
   }
 }

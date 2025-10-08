@@ -1,13 +1,19 @@
 SistemaParticulas s; 
+
+void settings()
+{
+  size(displayWidth, displayHeight);
+}
+
 void setup()
 {
-  size(640,480);
-  s = new SistemaParticulas(new PVector(40, 240));
-}
+  float viscosidad = 0.01;
+  s = new SistemaParticulas(new PVector(40, displayHeight/2), viscosidad);
+} //<>//
 
 void draw()
 {
  background(128);
  if (mousePressed) { s.addParticula(); }
- s.run(); //<>//
+ s.run();
 }
