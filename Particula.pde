@@ -1,11 +1,13 @@
 class Particula {
   PVector posicion;
   PVector velocidad;
+  PVector aceleracion;
   float tamanio;
   Particula(PVector donde)
   {
     posicion = donde.copy();
     velocidad = new PVector(random(2,3), random(-1.0, 1));
+    aceleracion = new PVector(0,0);
     tamanio = random(20,35);
   }
   
@@ -17,6 +19,7 @@ class Particula {
   
   void update()
   {
+    velocidad.add(aceleracion);
     posicion.add(velocidad);
   }
   
