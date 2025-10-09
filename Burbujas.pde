@@ -7,7 +7,7 @@ void settings()
 
 void setup()
 {
-  float viscosidad = 0.01;
+  float viscosidad = 0.02;
   s = new SistemaParticulas(new PVector(40, displayHeight/2), viscosidad);
 } //<>//
 

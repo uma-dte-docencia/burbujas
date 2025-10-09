@@ -14,9 +14,10 @@ class Particula {
   }
   
   void run()
-  {
-    update();
-    render();
+  { if (!isDead) {
+      update();
+      render();
+    }
   }
   
   void update()
