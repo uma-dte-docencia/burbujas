@@ -34,7 +34,6 @@ class Particula {
   }
   
   void aplicarViscosidad(float viscosidad) {
-    println("viscosidad = " + viscosidad); 
     float magnitudvelocidad = velocidad.mag();
     float magnitudresistencia = 0.0001 * viscosidad * magnitudvelocidad * magnitudvelocidad;
     PVector resistencia = velocidad.copy();
