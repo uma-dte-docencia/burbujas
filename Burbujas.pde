@@ -26,8 +26,11 @@ void draw()
  s.run();
 }
 
+void mousePressed() {
+  if (mouseButton == RIGHT) { looping = !looping; }
+}
+
 void serialEvent(Serial puertoserie) {
   String datoString = puertoserie.readString();
-  //println(datoString);
   dato = float(datoString.trim());
 }
