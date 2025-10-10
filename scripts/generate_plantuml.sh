@@ -4,12 +4,12 @@
 PLANTUML_FILE="doc/classes_diagram.puml"
 
 # Encabezado del archivo PlantUML
-echo "@startuml clases_processing" > "$PLANTUML_FILE"
+echo "@startuml classes_processing" > "$PLANTUML_FILE"
 echo "" >> "$PLANTUML_FILE"
 echo "' Declaración de las clases en Processing" >> "$PLANTUML_FILE"
 
 # Procesar cada archivo .pde y extraer clases y métodos
-for FILE in *.pde; do
+for FILE in *.pde; do 
     CLASS_NAME=$(basename "$FILE" .pde)
     echo "class $CLASS_NAME {" >> "$PLANTUML_FILE"
 
