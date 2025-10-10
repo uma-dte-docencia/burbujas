@@ -5,14 +5,14 @@ class Burbujas {
     +void settings()
     +void setup()
     +void draw()
-    +void mousePressed() {
-    +void serialEvent(Serial puertoserie) {
+    +void mousePressed()
+    +void serialEvent(Serial puertoserie)
 }
 
 class Particula {
     +void run()
     +void update()
-    +void aplicarFuerza(PVector fuerza)
+    +void aplicarFuerza(PVector f)
     +void aplicarViscosidad(float viscosidad)
     +void render()
 }

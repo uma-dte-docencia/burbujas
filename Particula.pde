@@ -29,10 +29,10 @@ class Particula {
     if (random(0,1000) > 995) {isDead = true; }
   }
   
-  void aplicarFuerza(PVector fuerza) 
+  void aplicarFuerza(PVector f) 
   {
     // Como si la masa fuera siempre 1: 
-    aceleracion.add(fuerza);
+    aceleracion.add(f);
   }
   
   void aplicarViscosidad(float viscosidad) 
