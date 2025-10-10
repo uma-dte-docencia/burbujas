@@ -1,0 +1,13 @@
+#!/bin/bash
+# Hook de pre-commit para actualizar el diagrama PlantUML y la imagen PNG
+
+# Ruta al archivo PlantUML
+PLANTUML_FILE="doc/classes_diagram.puml"
+PNG_FILE="doc/classes_processing.png"
+
+# Verifica si el archivo PlantUML ha cambiado
+if git diff --cached --name-only | grep -q "$PLANTUML_FILE"; then
+    echo "Actualizando el diagrama PNG desde $PLANTUML_FILE..."
+    plantuml "$PLANTUML_FILE" -o "$(dirname "$PLANTUML_FILE")"
+    git add "$PNG_FILE"
+fi
