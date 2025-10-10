@@ -1,4 +1,4 @@
-@startuml classes_processing
+@startuml clases_processing
 
 ' Declaración de las clases en Processing
 class Burbujas {
@@ -12,15 +12,15 @@ class Burbujas {
 class Particula {
     +void run()
     +void update()
-    +void aplicarFuerza(PVector f) {
-    +void aplicarViscosidad(float viscosidad) {
+    +void aplicarFuerza(PVector f)
+    +void aplicarViscosidad(float viscosidad)
     +void render()
 }
 
 class SistemaParticulas {
-    +void addParticula() {
-    +void addParticula(int n) {
-    +void run() {
+    +void addParticula()
+    +void addParticula(int n)
+    +void run()
 }
 
 ' Relaciones entre las clases

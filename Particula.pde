@@ -29,12 +29,14 @@ class Particula {
     if (random(0,1000) > 995) {isDead = true; }
   }
   
-  void aplicarFuerza(PVector f) {
+  void aplicarFuerza(PVector f) 
+  {
     // Como si la masa fuera siempre 1: 
     aceleracion.add(f);
   }
   
-  void aplicarViscosidad(float viscosidad) {
+  void aplicarViscosidad(float viscosidad) 
+  {
     float magnitudvelocidad = velocidad.mag();
     float magnitudresistencia = 0.0001 * viscosidad * magnitudvelocidad * magnitudvelocidad;
     PVector resistencia = velocidad.copy();
