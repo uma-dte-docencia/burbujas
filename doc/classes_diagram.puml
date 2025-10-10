@@ -1,38 +1,29 @@
-@startuml clases_processing
+@startuml classes_processing
 
 ' Declaración de las clases en Processing
 class Burbujas {
     +void settings()
     +void setup()
     +void draw()
-    +void mousePressed()
-    +void serialEvent(Serial)
+    +void mousePressed() {
+    +void serialEvent(Serial puertoserie) {
 }
 
 class Particula {
-    +PVector posicion
-    +PVector velocidad
-    +PVector aceleracion
-    +float tamanio
-    +boolean isDead
     +void run()
     +void update()
-    +void aplicarFuerza(PVector)
-    +void aplicarViscosidad(float)
+    +void aplicarFuerza(PVector f) {
+    +void aplicarViscosidad(float viscosidad) {
     +void render()
 }
 
 class SistemaParticulas {
-    +ArrayList<Particula> particulas
-    +PVector origin
-    +float viscosidad
-    +void addParticula()
-    +void addParticula(int)
-    +void run()
+    +void addParticula() {
+    +void addParticula(int n) {
+    +void run() {
 }
 
 ' Relaciones entre las clases
-' Burbujas --> SistemaParticulas : usa
 SistemaParticulas --> Particula : contiene
 
 @enduml
