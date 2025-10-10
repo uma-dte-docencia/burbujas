@@ -13,10 +13,13 @@ for FILE in *.pde; do
     CLASS_NAME=$(basename "$FILE" .pde)
     echo "class $CLASS_NAME {" >> "$PLANTUML_FILE"
 
-    # Extraer métodos públicos del archivo
-    grep -E "^\s*(public|void)\s+\w+\s*\(" "$FILE" | while read -r LINE; do
-        METHOD_NAME=$(echo "$LINE" | sed -E 's/^\s*(public|void)\s+([a-zA-Z0-9_]+)\s*\(.*/\2()/')
-        echo "    +$METHOD_NAME" >> "$PLANTUML_FILE"
+    # Extraer métodos públicos del archivo (excluir private/protected)
+    grep -vE "^\s*(private|protected)" "$FILE" | grep -E "^\s*(public\s+)?[a-zA-Z0-9_]+\s+[a-zA-Z0-9_]+\s*\(" | while read -r LINE; do
+        # Extraer usando sed para mejor compatibilidad con paréntesis
+        METHOD_SIGNATURE=$(echo "$LINE" | sed -E 's/^\s*(public\s+)?([a-zA-Z0-9_]+)\s+([a-zA-Z0-9_]+)\s*\(([^)]*)\).*/+\2 \3(\4)/')
+        # Limpiar espacios extra en la firma del método
+        METHOD_SIGNATURE=$(echo "$METHOD_SIGNATURE" | sed 's/\s+/ /g')
+        echo "    $METHOD_SIGNATURE" >> "$PLANTUML_FILE"
     done
 
     echo "}" >> "$PLANTUML_FILE"
