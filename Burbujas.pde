@@ -21,8 +21,8 @@ void setup()
 void draw()
 {
  background(128);
- //if (mousePressed) { s.addParticula(); }
- if (dato > 200) { s.addParticula(); }
+ if (mousePressed) { s.addParticula(); }
+ if (dato > 100) { s.addParticula(5); }
  s.run();
 }
 
