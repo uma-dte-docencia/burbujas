@@ -16,10 +16,10 @@ for FILE in *.pde; do
     # Extraer métodos públicos del archivo (excluir private/protected)
     grep -vE "^\s*(private|protected)" "$FILE" | grep -E "^\s*(public\s+)?[a-zA-Z0-9_]+\s+[a-zA-Z0-9_]+\s*\(" | while read -r LINE; do
         # Extraer usando sed para mejor compatibilidad con paréntesis
-        METHOD_SIGNATURE=$(echo "$LINE" | sed -E 's/^\s*(public\s+)?([a-zA-Z0-9_]+)\s+([a-zA-Z0-9_]+)\s*\(([^)]*)\).*/+\2 \3(\4)/')
-        # Limpiar espacios extra en la firma del método
-        METHOD_SIGNATURE=$(echo "$METHOD_SIGNATURE" | sed 's/\s+/ /g')
-        echo "    $METHOD_SIGNATURE" >> "$PLANTUML_FILE"
+        METHOD_SIGNATURE=$(echo "$LINE" | sed -E 's/^\s*(public\s+)?([a-zA-Z0-9_]+)\s+([a-zA-Z0-9_]+)\s*\(([^)]*)\).*/\2 \3(\4)/')
+        # Limpiar espacios extra y agregar el + al inicio
+        METHOD_SIGNATURE=$(echo "$METHOD_SIGNATURE" | sed 's/\s\+/ /g')
+        echo "    +$METHOD_SIGNATURE" >> "$PLANTUML_FILE"
     done
 
     echo "}" >> "$PLANTUML_FILE"
