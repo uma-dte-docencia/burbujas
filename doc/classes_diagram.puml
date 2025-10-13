@@ -13,7 +13,7 @@ class Particula {
     +void run()
     +void update()
     +void aplicarFuerza(PVector f)
-    +void aplicarViscosidad(float viscosidad)
+    +void aplicarViscosidad(float v)
     +void render()
 }
 

@@ -35,10 +35,10 @@ class Particula {
     aceleracion.add(f);
   }
   
-  void aplicarViscosidad(float viscosidad) 
+  void aplicarViscosidad(float v) 
   {
     float magnitudvelocidad = velocidad.mag();
-    float magnitudresistencia = 0.0001 * viscosidad * magnitudvelocidad * magnitudvelocidad;
+    float magnitudresistencia = 0.0001 * v * magnitudvelocidad * magnitudvelocidad;
     PVector resistencia = velocidad.copy();
     resistencia.mult(-1); // dirección inversa a la velocidad
     resistencia.setMag(magnitudresistencia);
