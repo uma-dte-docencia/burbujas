@@ -31,8 +31,8 @@ void mousePressed()
   if (mouseButton == RIGHT) { looping = !looping; }
 }
 
-void serialEvent(Serial puerto) 
+void serialEvent(Serial port) 
 {
-  String datoString = puertoserie.readString();
+  String datoString = port.readString();
   dato = float(datoString.trim());
 }
