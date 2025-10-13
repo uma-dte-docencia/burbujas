@@ -6,7 +6,7 @@ class Burbujas {
     +void setup()
     +void draw()
     +void mousePressed()
-    +void serialEvent(Serial puertoserie)
+    +void serialEvent(Serial puerto)
 }
 
 class Particula {
