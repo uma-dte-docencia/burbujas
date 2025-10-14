@@ -6,16 +6,18 @@ float dato = 0;
 void settings()
 {
   size(displayWidth, displayHeight);
-  printArray(Serial.list());
-  String portName = Serial.list()[2];
-  arduino = new Serial(this, portName, 115200);
-  arduino.bufferUntil('\n');
 }
 
 void setup()
 {
+  printArray(Serial.list());
+  String portName = Serial.list()[0];
+  arduino = new Serial(this, portName, 115200);
+  arduino.bufferUntil('\n');
+
   float viscosidad = 0.02;
   s = new SistemaParticulas(new PVector(40, displayHeight/2), viscosidad);
+
 }
 
 void draw()
