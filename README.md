@@ -20,16 +20,13 @@ Este repositorio está hecho para jugar con el lenguaje [Processing](https://pro
 ```
 
 Descripción: 
-- Divisor de tensión con una resistencia de 100 kΩ (entre Vcc y el punto medio) y un micrófono electret conectado entre el punto medio y tierra, con el negativo del micrófono a tierra.
+- Divisor de tensión con una resistencia de 100 kΩ (entre Vcc y el punto medio) y un micrófono electret (entre el punto medio y tierra, el negativo del micrófono a tierra).
 - El punto medio del divisor está conectado al pin analógico A0 del Arduino.
 
-## Documentación automática con PlantUML
+## Documentación con PlantUML
 
-También aprovechamos este repo para jugar con control de versiones y la automatización de parte de la documentación con la herramienta [PlantUML](https://plantuml.com/).
+También aprovechamos este repo para jugar con control de versiones y la automatización de parte de la documentación con la herramienta [PlantUML](https://plantuml.com/) (ver directorio [doc](./doc)). 
 
-El siguiente diagrama muestra las clases utilizadas en la parte de Processing y sus relaciones. Gracias a los scripts que hay en [scripts](./scripts) y en [.githooks](./.githooks), si se hace algún cambio al código .pde, al hacer commit de dichos cambios automáticamente se actualiza el siguiente diagrama. Los diagramas están hechos PlantUML.  
-
-![Diagrama de Clases](./doc/classes_processing.png)
 
 
 
