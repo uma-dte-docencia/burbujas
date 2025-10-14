@@ -15,20 +15,23 @@ state Inicializando {
 Inicializando --> Viva : inicialización completa
 
 state Viva {
-  Viva : do / update()
-  Viva : do / render()
-  Viva : entry / visible en pantalla
+  Viva : do / update() y render()
   
-  state update {
-    update : velocidad.add(aceleracion)
-    update : posicion.add(velocidad)
-    update : tamanio += 0.1
+  state "Ejecutar update()" as update_activity {
+    update_activity : velocidad.add(aceleracion)
+    update_activity : posicion.add(velocidad)
+    update_activity : tamanio += 0.1
+    update_activity : verificar condiciones de muerte
   }
   
-  state render {
-    render : fill(255, 128)
-    render : ellipse(posicion.x, posicion.y, tamanio, tamanio)
+  state "Ejecutar render()" as render_activity {
+    render_activity : fill(255, 128)
+    render_activity : ellipse(posicion.x, posicion.y, tamanio, tamanio)
   }
+  
+  [*] --> update_activity
+  update_activity --> render_activity
+  render_activity --> [*]
 }
 
 Viva --> Muerta : [velocidad.mag() < 0.01] / isDead = true
