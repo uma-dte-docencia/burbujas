@@ -16,6 +16,7 @@ Inicializando --> Viva : inicialización completa
 
 state Viva {
   Viva : do / update() y render()
+  Viva : aplicarViscosidad(v) / calcular resistencia y aplicar fuerza
   
   state "Ejecutar update()" as update_activity {
     update_activity : velocidad.add(aceleracion)
@@ -30,12 +31,11 @@ state Viva {
   }
   
   [*] --> update_activity
-  update_activity --> render_activity
+  update_activity --> render_activity : [velocidad.mag() >= 0.01] AND [random(0,1000) <= 995]
+  update_activity --> Muerta : [velocidad.mag() < 0.01] / isDead = true
+  update_activity --> Muerta : [random(0,1000) > 995] / isDead = true
   render_activity --> [*]
 }
-
-Viva --> Muerta : [velocidad.mag() < 0.01] / isDead = true
-Viva --> Muerta : [random(0,1000) > 995] / isDead = true
 
 state Muerta {
   Muerta : entry / isDead = true
@@ -45,12 +45,6 @@ state Muerta {
 }
 
 Muerta --> [*] : eliminada por SistemaParticulas.run()
-
-note right of Viva
-  La partícula puede recibir fuerzas
-  externas como viscosidad
-  mediante aplicarFuerza()
-end note
 
 note left of Muerta
   Condiciones de muerte:
