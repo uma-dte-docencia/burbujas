@@ -29,11 +29,13 @@ state Viva {
     render_activity : fill(255, 128)
     render_activity : ellipse(posicion.x, posicion.y, tamanio, tamanio)
   }
+
+  state decision_muerte <<choice>>
   
   [*] --> update_activity
-  update_activity --> render_activity : [velocidad.mag() >= 0.01] AND [random(0,1000) <= 995]
-  update_activity --> Muerta : [velocidad.mag() < 0.01] / isDead = true
-  update_activity --> Muerta : [random(0,1000) > 995] / isDead = true
+  update_activity --> decision_muerte
+  decision_muerte --> render_activity : [velocidad.mag() >= 0.01] AND [random(0,1000) <= 995]
+  decision_muerte --> Muerta : [else] / isDead = true
   render_activity --> [*]
 }
 
