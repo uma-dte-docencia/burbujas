@@ -1,0 +1,58 @@
+@startuml state_diagram
+
+title Diagrama de Estados - Ciclo de Vida de una Partícula
+
+[*] --> Inicializando : new Particula(PVector donde)
+
+state Inicializando {
+  Inicializando : entry / posicion = donde.copy()
+  Inicializando : entry / velocidad = random(2,4), random(-1,1)
+  Inicializando : entry / aceleracion = (0,0)
+  Inicializando : entry / tamanio = random(20,35)
+  Inicializando : entry / isDead = false
+}
+
+Inicializando --> Viva : inicialización completa
+
+state Viva {
+  Viva : do / update()
+  Viva : do / render()
+  Viva : entry / visible en pantalla
+  
+  state update {
+    update : velocidad.add(aceleracion)
+    update : posicion.add(velocidad)
+    update : tamanio += 0.1
+  }
+  
+  state render {
+    render : fill(255, 128)
+    render : ellipse(posicion.x, posicion.y, tamanio, tamanio)
+  }
+}
+
+Viva --> Muerta : [velocidad.mag() < 0.01] / isDead = true
+Viva --> Muerta : [random(0,1000) > 995] / isDead = true
+
+state Muerta {
+  Muerta : entry / isDead = true
+  Muerta : do / no se ejecuta update()
+  Muerta : do / no se ejecuta render()
+  Muerta : exit / eliminada del ArrayList
+}
+
+Muerta --> [*] : eliminada por SistemaParticulas.run()
+
+note right of Viva
+  La partícula puede recibir fuerzas
+  externas como viscosidad
+  mediante aplicarFuerza()
+end note
+
+note left of Muerta
+  Condiciones de muerte:
+  1. Velocidad muy baja (< 0.01)
+  2. Probabilidad aleatoria (0.5%)
+end note
+
+@enduml
