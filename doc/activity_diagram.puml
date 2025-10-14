@@ -1,0 +1,75 @@
+@startuml activity_diagram
+
+title Diagrama de Actividad - Sistema de Burbujas
+
+start
+
+:Inicializar configuración (settings);
+note right
+  - Configurar tamaño de pantalla
+  - Listar puertos serie
+  - Conectar con Arduino
+  - Configurar buffer serie
+end note
+
+:Configurar sistema (setup);
+note right
+  - Crear SistemaParticulas
+  - Configurar viscosidad
+  - Establecer origen
+end note
+
+fork
+  partition "Bucle Principal" {
+    repeat
+      :Limpiar fondo (background);
+      
+      if (Ratón presionado?) then (sí)
+        :Añadir una partícula;
+      endif
+      
+      if (Dato sensor > 100?) then (sí)
+        :Añadir 5 partículas;
+      endif
+      
+      :Ejecutar sistema de partículas;
+      note right
+        Para cada partícula:
+        - Aplicar viscosidad
+        - Actualizar física
+        - Renderizar
+        - Eliminar si está muerta
+      end note
+      
+    repeat while (Programa activo?)
+  }
+fork again
+  partition "Evento Asíncrono - Ratón" {
+    
+    floating note left: Estos eventos pueden\nocurrir en cualquier momento
+    
+    repeat
+      :Evento del ratón;
+      if (Botón derecho?) then (sí)
+        :Pausar/reanudar animación;
+      endif
+    repeat while (Programa activo?)
+  }
+fork again
+  partition "Evento Asíncrono - Puerto Serie" {
+    
+    repeat
+      :Evento serie (Arduino);
+      :Leer y procesar dato del sensor;
+      note right
+        - Leer string del puerto
+        - Convertir a float
+        - Actualizar variable global
+      end note
+    repeat while (Programa activo?)
+  }
+end fork
+
+stop
+
+@enduml
