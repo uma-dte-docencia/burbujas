@@ -17,9 +17,9 @@ class SistemaParticulas {
     particulas.add(p);
   }
   
-  void addParticula(int n) 
+  void addParticula(int cuantas) 
   {
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < cuantas; i++) {
       addParticula();
     }
   }   

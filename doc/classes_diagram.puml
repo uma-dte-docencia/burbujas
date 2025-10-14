@@ -19,7 +19,7 @@ class Particula {
 
 class SistemaParticulas {
     +void addParticula()
-    +void addParticula(int n)
+    +void addParticula(int cuantas)
     +void run()
 }
 
