@@ -1,0 +1,40 @@
+@startuml particula_instances
+!pragma class_diagram_strict
+
+!theme plain
+skinparam objectAttributeFontSize 12
+skinparam objectFontSize 14
+skinparam backgroundColor white
+skinparam objectBorderThickness 2
+
+object "burbuja1 : Particula" as p1 #ADD8E6 {
+  posicion = PVector(120, 200)
+  velocidad = PVector(3.2, -0.5)
+  aceleracion = PVector(0, 0)
+  tamanio = 25.4
+  isDead = false
+}
+
+object "burbuja2 : Particula" as p2 #F08080 {
+  posicion = PVector(350, 150)
+  velocidad = PVector(2.1, 0.8)
+  aceleracion = PVector(0, 0)
+  tamanio = 31.7
+  isDead = false
+}
+
+note bottom of p1
+  **Partícula Joven**
+  • Tamaño pequeño
+  • Velocidad alta hacia arriba
+  • Recién creada
+end note
+
+note bottom of p2
+  **Partícula Madura**
+  • Tamaño mayor
+  • Velocidad más lenta
+  • Ha crecido con el tiempo
+end note
+
+@enduml

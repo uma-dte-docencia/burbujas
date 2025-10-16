@@ -1,0 +1,28 @@
+@startuml particula_simple_class
+
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontSize 14
+skinparam classAttributeFontSize 12
+skinparam classOperationFontSize 12
+skinparam backgroundColor white
+skinparam classBackgroundColor #F8F9FA
+skinparam classBorderColor #343A40
+skinparam classBorderThickness 2
+
+class Particula {
+  -PVector posicion
+  -PVector velocidad
+  -PVector aceleracion
+  -float tamanio
+  -boolean isDead
+  ____
+  +Particula(PVector donde)
+  +void run()
+  +void update()
+  +void aplicarFuerza(PVector f)
+  +void aplicarViscosidad(float v)
+  +void render()
+}
+
+@enduml
