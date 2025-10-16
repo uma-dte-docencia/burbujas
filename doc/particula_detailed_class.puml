@@ -1,0 +1,113 @@
+@startuml particula_detailed_class
+
+title Diagrama de Clases Detallado - Particula
+
+!define LIGHTBLUE #E1F5FE
+!define LIGHTGREEN #E8F5E8
+!define LIGHTYELLOW #FFFDE7
+
+package "Processing Core" LIGHTBLUE {
+  class PVector {
+    +float x
+    +float y
+    +float z
+    --
+    +PVector(float x, float y)
+    +PVector copy()
+    +void add(PVector v)
+    +void mult(float n)
+    +float mag()
+    +void setMag(float len)
+  }
+}
+
+package "Sistema de Partículas" LIGHTGREEN {
+  
+  class Particula {
+    .. Atributos de Estado ..
+    ~PVector posicion
+    ~PVector velocidad  
+    ~PVector aceleracion
+    ~float tamanio
+    ~boolean isDead
+    
+    .. Constructor ..
+    +Particula(PVector donde)
+    
+    .. Métodos de Control ..
+    +void run()
+    
+    .. Métodos de Física ..
+    +void update()
+    +void aplicarFuerza(PVector f)
+    +void aplicarViscosidad(float v)
+    
+    .. Métodos de Renderizado ..
+    +void render()
+    
+    ====
+    .. Constantes Físicas ..
+    -float FACTOR_RESISTENCIA = 0.0001
+    -float VELOCIDAD_MINIMA = 0.01
+    -float PROBABILIDAD_MUERTE = 995
+    
+    ====
+    .. Responsabilidades ..
+    • Simular física de partícula
+    • Gestionar ciclo de vida
+    • Renderizar representación visual
+    • Aplicar fuerzas externas
+  }
+}
+
+package "Processing Graphics" LIGHTYELLOW {
+  class "Processing Functions" as ProcessingFuncs <<utility>> {
+    +void push()
+    +void pop()
+    +void fill(int color, int alpha)
+    +void ellipseMode(int mode)
+    +void ellipse(float x, float y, float w, float h)
+    +float random(float min, float max)
+    +int CENTER
+  }
+}
+
+' Relaciones de composición
+Particula ||--o{ PVector : "contiene 3"
+note on link : posicion, velocidad,\naceleracion
+
+' Relaciones de dependencia
+Particula ..> ProcessingFuncs : "<<usa>>"
+note on link : para renderizado\ny números aleatorios
+
+' Notas explicativas
+note top of Particula
+  **Patrón de Diseño**: Entity Component
+  
+  **Estados posibles**:
+  • Inicializando (constructor)
+  • Viva (isDead = false)
+  • Muerta (isDead = true)
+  
+  **Condiciones de muerte**:
+  • Velocidad < 0.01
+  • Probabilidad 0.5% por frame
+end note
+
+note bottom of Particula
+  **Métodos principales**:
+  
+  • **run()**: Método principal que coordina
+    update() y render() si está viva
+    
+  • **update()**: Actualiza física y verifica
+    condiciones de muerte
+    
+  • **aplicarViscosidad()**: Calcula y aplica
+    resistencia basada en velocidad²
+    
+  • **render()**: Dibuja círculo semitransparente
+    con tamaño variable
+end note
+
+@enduml
